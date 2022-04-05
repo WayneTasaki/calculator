@@ -3,6 +3,7 @@ let previousNum = ''
 let operator = ''
 
 const clearButton = document.querySelector('.clear-button');
+clearButton.addEventListener('click', clearDisplay)
 const deleteButton = document.querySelector('.delete-button');
 const numButtons = document.querySelectorAll('.number-button');
 const operators = document.querySelectorAll('.operator-button');
@@ -67,3 +68,11 @@ function operate() {
   currentNumDisplay.textContent = previousNum
 }
 // The main operator function that calculates and displays the results
+
+function clearDisplay() {
+  previousNumDisplay.textContent = ''
+  currentNumDisplay.textContent = ''
+}
+
+// TO ADD:
+// add character limit to the operate function, clear, delete, chain operations with correct number
