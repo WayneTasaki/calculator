@@ -17,15 +17,23 @@ body {
   border-radius: 8px;
 }
 
-.calculator .display {
+.currentNumDisplay {
   background: none;
   border: none;
   box-shadow: none;
   width: 100%;
+  height: 44.53px;
   border-bottom: 2px solid #111;
-  padding: 1.25rem;
+  padding-right: 1.3rem;
   text-align: right;
   font-size: 2.25rem;
+}
+.previousNumDisplay {
+  width: 100%;
+  height: 23.8px;
+  text-align: right;
+  font-size: 1.2rem;
+  padding-right: 1.6rem;
 }
 
 .button-wrapper {
