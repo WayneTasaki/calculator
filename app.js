@@ -5,10 +5,11 @@ let operator = ''
 const clearButton = document.querySelector('.clear-button');
 clearButton.addEventListener('click', clearDisplay)
 const deleteButton = document.querySelector('.delete-button');
+deleteButton.addEventListener('click', deleteNum)
 const numButtons = document.querySelectorAll('.number-button');
 const operators = document.querySelectorAll('.operator-button');
 const equals = document.querySelector('.equals-button')
-equals.addEventListener('click', operate)
+equals.addEventListener('click', equalsValidation)
 
 const currentNumDisplay = document.querySelector('.currentNumDisplay')
 const previousNumDisplay = document.querySelector('.previousNumDisplay');
@@ -21,6 +22,9 @@ numButtons.forEach(btn => {
 // adds an event listener to each number button and fires the displayNums function
 
 function displayNums(number) {
+  if (previousNum !== '' && currentNum !== '' && operator === '') {
+    previousNumDisplay.textContent = currentNum
+  }
   if (currentNum.length <= 16) {
   currentNum += number
   currentNumDisplay.textContent = currentNum
@@ -36,13 +40,26 @@ operators.forEach(btn => {
 // adds event listener to each operator button and fires the displayOperators function
 
 function displayOperators(op) {
-  operator = op
-  previousNum = currentNum
-  previousNumDisplay.textContent = `${previousNum} ${op}`
-  currentNum = ''
-  currentNumDisplay.textContent = ''
+  if (previousNum === '') {
+    previousNum = currentNum
+    chainOperate(op)
+  } else if (currentNum === '') {
+    chainOperate(op)
+  } else {
+    operate()
+    operator = op
+    currentNumDisplay.textContent = '0'
+    previousNumDisplay.textContent = `${previousNum} ${operator}`
+  }
 }
 // since clicking an operator indicates another number will be selected, this changes the number displayed in the displayNums function to a variable called previousNum and displays that above the currentNum section along with the operator
+
+function chainOperate(a) {
+  operator = a
+  previousNumDisplay.textContent = `${previousNum} ${operator}`
+  currentNumDisplay.textContent = ''
+  currentNum = ''
+}
 
 function operate() {
   currentNum = Number(currentNum)
@@ -55,18 +72,17 @@ function operate() {
     previousNum = previousNum * currentNum
   } else if (operator === '÷') {
       if (currentNum <= 0) {
-        previousNum = 'ERROR'
+        previousNum = 'No dividing by 0'
         previousNumDisplay.textContent = ''
         currentNumDisplay.textContent = previousNum
         operator = ''
+        displayResult()
         return
       }
       previousNum = previousNum / currentNum
   }
   previousNum = previousNum.toString()
-  previousNumDisplay.textContent = ''
-  currentNumDisplay.textContent = previousNum
-  currentNum = previousNum
+  displayResult()
 }
 // The main operator function that calculates and displays the results
 
@@ -77,6 +93,32 @@ function clearDisplay() {
   previousNum = ''
   operator = ''
 }
+// Resets the calculator
+
+
+function displayResult() {
+  if (previousNum.length <= 16) {
+    currentNumDisplay.textContent = previousNum
+  } else {
+    currentNumDisplay.textContent = previousNum.slice(0,15)
+  }
+  previousNumDisplay.textContent = ''
+  operator = ''
+  currentNum = ''
+}
+
+function equalsValidation() {
+  if (currentNum != '' && previousNum != '') {
+    operate()
+  }
+}
+
+function deleteNum() {
+  currentNum = currentNumDisplay.textContent = currentNum.slice(0, currentNum.length - 1)
+  if (currentNum === '') {
+    currentNumDisplay.textContent = '0'
+  }
+}
 
 // TO ADD:
-// add character limit to the operate function, delete, chain operations with correct number
+// delete, comment code again
