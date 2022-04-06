@@ -3,7 +3,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://waynetasaki.github.io/etch-a-sketch/">🌐 Live Site </a>
+    <a href="https://waynetasaki.github.io/calculator/">🌐 Live Site </a>
   </h3>
 </div>
 <div align="center">
@@ -16,6 +16,6 @@
 <p>HTML, CSS, JavaScript</p>
 
 ## What I learned
-- Learned lots about buttons and how you can run functions onclick or onchange.
-- Created a range slider for the first time. The project originally called for using a prompt() as the input for how large the grid should be, but I thought a slider is a better UX solution. It was interesting figuring out how to pass the slider value to the function that creates the game board squares.
-- Overall this was a great lesson in DOM manipulation.
+- I chose to create the calculator layout using Grid which to date is something I haven't used often so that was great practice.
+- A lot of how I built the project was based off of variable mutation. While I've mutated variables before, I don't believe I've done it quite like this. For example "currentNum" and "previousNum" would be mutated several times in one function which would be nested inside another function that mutates them again. It sometimes took me a bit to keep it all straight, but I think it was necessary due to having to store their changing values.
+- Keycodes! Adding the keyboard functionality was fun because I was able to play with different key values. I found a website https://keycode.info/table-of-all-keycodes that lists them all in a table so you don't have to console log the event object and sift through it.
