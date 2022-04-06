@@ -66,13 +66,17 @@ function operate() {
   previousNum = previousNum.toString()
   previousNumDisplay.textContent = ''
   currentNumDisplay.textContent = previousNum
+  currentNum = previousNum
 }
 // The main operator function that calculates and displays the results
 
 function clearDisplay() {
   previousNumDisplay.textContent = ''
-  currentNumDisplay.textContent = ''
+  currentNumDisplay.textContent = '0'
+  currentNum = ''
+  previousNum = ''
+  operator = ''
 }
 
 // TO ADD:
-// add character limit to the operate function, clear, delete, chain operations with correct number
+// add character limit to the operate function, delete, chain operations with correct number
