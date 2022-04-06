@@ -2,6 +2,8 @@ let currentNum = ''
 let previousNum = ''
 let operator = ''
 
+window.addEventListener('keydown', keyboardCalc)
+
 const clearButton = document.querySelector('.clear-button');
 clearButton.addEventListener('click', clearDisplay)
 const deleteButton = document.querySelector('.delete-button');
@@ -10,6 +12,8 @@ const numButtons = document.querySelectorAll('.number-button');
 const operators = document.querySelectorAll('.operator-button');
 const equals = document.querySelector('.equals-button')
 equals.addEventListener('click', equalsValidation)
+const decimal = document.querySelector('.decimal-button')
+decimal.addEventListener('click', insertDecimal)
 
 const currentNumDisplay = document.querySelector('.currentNumDisplay')
 const previousNumDisplay = document.querySelector('.previousNumDisplay');
@@ -106,12 +110,14 @@ function displayResult() {
   operator = ''
   currentNum = ''
 }
+// 
 
 function equalsValidation() {
   if (currentNum != '' && previousNum != '') {
     operate()
   }
 }
+// prevents user from using the equals button which fires the operate function if there are no numbers
 
 function deleteNum() {
   currentNum = currentNumDisplay.textContent = currentNum.slice(0, currentNum.length - 1)
@@ -119,6 +125,44 @@ function deleteNum() {
     currentNumDisplay.textContent = '0'
   }
 }
+// deletes the last number entered
 
-// TO ADD:
-// delete, comment code again
+function insertDecimal() {
+  if (!currentNum.includes('.')) {
+    currentNum += '.'
+    currentNumDisplay.textContent = currentNum
+  }
+}
+// insers a decimal to the current number
+
+function keyboardCalc(k) {
+  k.preventDefault()
+  if (k.key >= 0 && k.key <= 9) {
+    displayNums(k.key)
+  }
+  if (k.key === 'Escape') {
+    clearDisplay()
+  }
+  if (k.key === 'Backspace') {
+    deleteNum()
+  }
+  if (k.key === '/') {
+    displayOperators('÷')
+  }
+  if (k.key === '*') {
+    displayOperators('×')
+  }
+  if (k.key === '-') {
+    displayOperators('−')
+  }
+  if (k.key === '+') {
+    displayOperators('+')
+  }
+  if (k.key === '.') {
+    insertDecimal()
+  }
+  if (k.key === 'Enter') {
+    operate()
+  }
+}
+// Adds keyboard functionality to the calculator
