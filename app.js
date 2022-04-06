@@ -161,7 +161,7 @@ function keyboardCalc(k) {
   if (k.key === '.') {
     insertDecimal()
   }
-  if (k.key === 'Enter') {
+  if (k.key === 'Enter' || k.key === '=') {
     operate()
   }
 }
